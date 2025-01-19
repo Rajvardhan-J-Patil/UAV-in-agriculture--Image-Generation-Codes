@@ -1,0 +1,20 @@
+flowchart TB
+    subgraph Environmental["Environmental Challenges"]
+        A[Weather Conditions] --> B[Flight Restrictions]
+        C[Light Variations] --> D[Calibration Issues]
+    end
+
+    subgraph Technical["Technical Challenges"]
+        E[Sensor Calibration] --> F[Data Processing]
+        G[Battery Life] --> H[Coverage Limitations]
+    end
+
+    subgraph Solutions["Implemented Solutions"]
+        I[Weather Monitoring Systems]
+        J[Advanced Calibration Algorithms]
+        K[Automated Flight Planning]
+        L[Enhanced Battery Management]
+    end
+
+    Environmental --> Solutions
+    Technical --> Solutions

@@ -1,0 +1,22 @@
+flowchart TB
+    A[Raw Sensor Data Collection] --> B[Pre-processing]
+    B --> C[Atmospheric Correction]
+    C --> D[Spectral Analysis]
+    
+    subgraph Processing["Data Processing"]
+        D --> E[Feature Extraction]
+        E --> F[Calibration]
+        F --> G[Machine Learning Models]
+    end
+    
+    subgraph Analysis["Analysis & Output"]
+        G --> H[Brix Estimation]
+        H --> I[Validation]
+        I --> J[Results Generation]
+    end
+    
+    subgraph Calibration["Calibration Process"]
+        K[Ground Truth Data] --> F
+        L[Historical Data] --> F
+        M[Environmental Factors] --> F
+    end

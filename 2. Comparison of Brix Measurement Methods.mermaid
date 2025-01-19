@@ -1,0 +1,46 @@
+flowchart TB
+    subgraph Traditional["Traditional Methods"]
+        direction TB
+        A["`**Hand-held Refractometer**
+        Basic field measurement`"] --> B["`**Manual Sampling**
+        Collection & preparation`"]
+        B --> C["`**Laboratory Analysis**
+        Precise measurements`"]
+        C --> D["`**Results Documentation**
+        Data recording & reporting`"]
+    end
+
+    subgraph Remote["Remote Sensing Methods"]
+        direction TB
+        E["`**Satellite Imagery**
+        Wide-area coverage`"] --> F["`**Spectral Analysis**
+        NIR/SWIR processing`"]
+        F --> G["`**Data Processing**
+        Calibration & validation`"]
+        G --> H["`**Brix Estimation**
+        Large-scale predictions`"]
+    end
+
+    subgraph UAV["UAV-based Methods"]
+        direction TB
+        I["`**Drone Deployment**
+        Targeted field surveys`"] --> J["`**Multispectral Imaging**
+        High-resolution capture`"]
+        J --> K["`**AI/ML Processing**
+        Advanced analytics`"]
+        K --> L["`**Real-time Brix Analysis**
+        Immediate results`"]
+    end
+
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
+    classDef traditional fill:#f5f5f5,stroke:#666,color:#333
+    classDef remote fill:#e6f3ff,stroke:#0066cc,color:#004d99
+    classDef uav fill:#e6ffe6,stroke:#006600,color:#004d00
+
+    class A,B,C,D traditional
+    class E,F,G,H remote
+    class I,J,K,L uav
+
+    style Traditional fill:#f5f5f5,stroke:#666,stroke-width:2px
+    style Remote fill:#e6f3ff,stroke:#0066cc,stroke-width:2px
+    style UAV fill:#e6ffe6,stroke:#006600,stroke-width:2px

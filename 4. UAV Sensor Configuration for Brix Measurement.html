@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UAV Sensor Configuration</title>
+<style>
+body { font-family: sans-serif; }
+</style>
+</head>
+<body>
+
+<div id="svg-container"></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+const width = 1000;
+const height = 600;
+
+const svg = d3.select("#svg-container")
+  .append("svg")
+  .attr("width", width)
+  .attr("height", height);
+
+// Background with subtle grid
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "#f8f9fa");
+
+const pattern = svg.append("defs")
+  .append("pattern")
+    .attr("id", "smallGrid")
+    .attr("width", 10)
+    .attr("height", 10)
+    .attr("patternUnits", "userSpaceOnUse");
+
+pattern.append("path")
+    .attr("d", "M 10 0 L 0 0 0 10")
+    .attr("fill", "none")
+    .attr("stroke", "#f1f3f5")
+    .attr("stroke-width", 0.5);
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "url(#smallGrid)");
+
+// Title
+svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", 40)
+    .attr("font-family", "Arial")
+    .attr("font-size", 24)
+    .attr("fill", "#212529")
+    .attr("text-anchor", "middle")
+    .attr("font-weight", "bold")
+    .text("UAV Sensor Configuration");
+
+// UAV Body
+svg.append("path")
+    .attr("d", "M450 120 L550 120 L600 170 L500 220 L400 170 Z")
+    .attr("fill", "#e9ecef")
+    .attr("stroke", "#495057")
+    .attr("stroke-width", 3);
+
+// Sensor Housing
+svg.append("rect")
+    .attr("x", 475)
+    .attr("y", 160)
+    .attr("width", 50)
+    .attr("height", 40)
+    .attr("fill", "#ced4da")
+    .attr("stroke", "#495057");
+
+// Sensors
+const sensors = [
+  { cx: 485, fill: "#228be6", stroke: "#1971c2" }, // Hyperspectral
+  { cx: 500, fill: "#40c057", stroke: "#2f9e44" }, // Multispectral
+  { cx: 515, fill: "#f76707", stroke: "#e8590c" }  // Thermal
+];
+
+sensors.forEach(sensor => {
+    svg.append("circle")
+        .attr("cx", sensor.cx)
+        .attr("cy", 180)
+        .attr("r", 12)
+        .attr("fill", sensor.fill)
+        .attr("stroke", sensor.stroke);
+});
+
+// Measurement Beams
+sensors.forEach((sensor, index) => {
+    const x2 = [465, 500, 535][index];
+    svg.append("line")
+        .attr("x1", sensor.cx)
+        .attr("y1", 192)
+        .attr("x2", x2)
+        .attr("y2", 400)
+        .attr("stroke", sensor.fill)
+        .attr("stroke-width", 2)
+        .attr("stroke-dasharray", "5,5");
+});
+
+
+// Sugarcane Field
+const sugarcaneLines = [
+    {d: "M350 400 Q500 380 650 400", width:3},
+    {d: "M370 420 Q500 400 630 420", width:2},
+    {d: "M390 440 Q500 420 610 440", width:2}
+]
+sugarcaneLines.forEach(line => {
+    svg.append("path")
+        .attr("d", line.d)
+        .attr("stroke", "#2f9e44")
+        .attr("stroke-width", line.width)
+        .attr("fill", "none");
+})
+
+// Legend
+const legendData = [
+  { cx: 670, fill: "#228be6", text: "Hyperspectral" },
+  { cx: 670, fill: "#40c057", text: "Multispectral" },
+  { cx: 670, fill: "#f76707", text: "Thermal" }
+];
+
+const legend = svg.append("g")
+.attr("transform", "translate(650, 150)");
+
+legend.append("rect")
+    .attr("width", 200)
+    .attr("height", 120)
+    .attr("fill", "white")
+    .attr("stroke", "#dee2e6");
+
+legend.append("text")
+    .attr("x", 10)
+    .attr("y", 20)
+    .attr("font-family", "Arial")
+    .attr("font-size", 16)
+    .attr("font-weight", "bold")
+    .text("Sensor Types:");
+
+legendData.forEach((item, i) => {
+    legend.append("circle")
+        .attr("cx", item.cx - 650) // Adjust x position relative to the legend group
+        .attr("cy", 40 + i * 30) // Vertical spacing
+        .attr("r", 6)
+        .attr("fill", item.fill);
+
+    legend.append("text")
+        .attr("x", item.cx - 635) // Adjust x position
+        .attr("y", 45 + i * 30)
+        .attr("font-family", "Arial")
+        .attr("font-size", 14)
+        .text(item.text);
+});
+
+</script>
+
+</body>
+</html>
